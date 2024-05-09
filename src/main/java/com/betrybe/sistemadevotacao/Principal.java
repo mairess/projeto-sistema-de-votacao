@@ -7,6 +7,9 @@ import java.util.Scanner;
  */
 public class Principal {
 
+  private static final Scanner scanner = new Scanner(System.in);
+  private static final GerenciamentoVotacao gerenciamentoVotacao = new GerenciamentoVotacao();
+
   /**
    * The entry point of application.
    *
@@ -14,16 +17,7 @@ public class Principal {
    */
   public static void main(String[] args) {
     // TODO Auto-generated method stub
-    Scanner scanner = new Scanner(System.in);
-    GerenciamentoVotacao gerenciamentoVotacao = new GerenciamentoVotacao();
-    String candidateName;
-    int candidateNumber;
-    String voterName;
-    String voterCpf;
-
-    outerLoop:
     while (true) {
-
       System.out.println("""
           Cadastrar pessoa candidata?
           1 - Sim
@@ -33,63 +27,90 @@ public class Principal {
       int selectedCandidateOption = scanner.nextInt();
 
       if (selectedCandidateOption == 1) {
-        System.out.println("Entre com o nome da pessoa candidata: ");
-        candidateName = scanner.next();
-        System.out.println("Entre com o número da pessoa candidata: ");
-        candidateNumber = scanner.nextInt();
-
-        gerenciamentoVotacao.cadastrarPessoaCandidata(candidateName, candidateNumber);
+        registerCandidate();
 
       } else if (selectedCandidateOption == 2) {
 
-        while (true) {
-          System.out.println("""
-              Cadastrar pessoa eleitora?
-              1 - Sim
-              2 - Não
-              Entre com o número correspondente à opção desejada:""");
+        boolean registerElector = registerElector();
 
-          int selectedVoterOption = scanner.nextInt();
+        if (registerElector) {
+          break;
+        }
 
-          if (selectedVoterOption == 1) {
-            System.out.println("Entre com o nome da pessoa eleitora: ");
-            voterName = scanner.next();
-            System.out.println("Entre com o CPF da pessoa eleitora: ");
-            voterCpf = scanner.next();
+      }
+    }
+    scanner.close();
+  }
 
-            gerenciamentoVotacao.cadastrarPessoaEleitora(voterName, voterCpf);
+  private static void registerCandidate() {
+    System.out.println("Entre com o nome da pessoa candidata: ");
+    String candidateName = scanner.next();
 
-          } else if (selectedVoterOption == 2) {
-            while (true) {
-              System.out.println("""
-                  Entre com o número correspondente à opção desejada:
-                  1 - Votar
-                  2 - Resultado Parcial
-                  3 - Finalizar Votação""");
+    System.out.println("Entre com o número da pessoa candidata: ");
+    int candidateNumber = scanner.nextInt();
 
-              int selectedOption = scanner.nextInt();
+    gerenciamentoVotacao.cadastrarPessoaCandidata(candidateName, candidateNumber);
+  }
 
-              if (selectedOption == 1) {
-                System.out.println("Entre com o cpf da pessoa eleitora: ");
-                String cpfPessoaEleitora = scanner.next();
+  private static boolean registerElector() {
+    while (true) {
+      System.out.println("""
+          Cadastrar pessoa eleitora?
+          1 - Sim
+          2 - Não
+          Entre com o número correspondente à opção desejada:""");
 
-                System.out.println("Entre com o número da pessoa candidata: ");
-                int numeroPessoaCandidata = scanner.nextInt();
+      int selectedElectorOption = scanner.nextInt();
 
-                gerenciamentoVotacao.votar(cpfPessoaEleitora, numeroPessoaCandidata);
-              } else if (selectedOption == 2) {
-                gerenciamentoVotacao.mostrarResultado();
-              } else if (selectedOption == 3) {
-                gerenciamentoVotacao.mostrarResultado();
-                break outerLoop;
-              }
-            }
-          }
+      if (selectedElectorOption == 1) {
+        System.out.println("Entre com o nome da pessoa eleitora: ");
+        String electorName = scanner.next();
 
+        System.out.println("Entre com o CPF da pessoa eleitora: ");
+        String electorCpf = scanner.next();
+
+        gerenciamentoVotacao.cadastrarPessoaEleitora(electorName, electorCpf);
+
+      } else if (selectedElectorOption == 2) {
+
+        boolean vote = vote();
+
+        if (vote) {
+          return true;
         }
 
       }
     }
   }
 
+  private static boolean vote() {
+    while (true) {
+      System.out.println("""
+          Entre com o número correspondente à opção desejada:
+          1 - Votar
+          2 - Resultado Parcial
+          3 - Finalizar Votação""");
+
+      int selectedOption = scanner.nextInt();
+
+      if (selectedOption == 1) {
+        System.out.println("Entre com o cpf da pessoa eleitora: ");
+        String cpfPessoaEleitora = scanner.next();
+
+        System.out.println("Entre com o número da pessoa candidata: ");
+        int numeroPessoaCandidata = scanner.nextInt();
+
+        gerenciamentoVotacao.votar(cpfPessoaEleitora, numeroPessoaCandidata);
+      } else if (selectedOption == 2) {
+
+        gerenciamentoVotacao.mostrarResultado();
+
+      } else if (selectedOption == 3) {
+
+        gerenciamentoVotacao.mostrarResultado();
+        return true;
+      }
+
+    }
+  }
 }

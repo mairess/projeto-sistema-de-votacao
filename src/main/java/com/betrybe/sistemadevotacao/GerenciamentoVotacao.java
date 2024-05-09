@@ -28,8 +28,8 @@ public class GerenciamentoVotacao implements GerenciamentoVotacaoInterface {
 
   @Override
   public void cadastrarPessoaEleitora(String nome, String cpf) {
-    for (PessoaEleitora voter : pessoasEleitoras) {
-      if (cpf.equals(voter.getCpf())) {
+    for (PessoaEleitora elector : pessoasEleitoras) {
+      if (cpf.equals(elector.getCpf())) {
         System.out.println("Pessoa eleitora já cadastrada!");
         return;
       }
