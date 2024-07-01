@@ -1,10 +1,18 @@
-# :construction: README em construção ! :construction:
-<!-- Olá, Tryber!
-Esse é apenas um arquivo inicial para o README do seu projeto.
-É essencial que você preencha esse documento por conta própria, ok?
-Não deixe de usar nossas dicas de escrita de README de projetos, e deixe sua criatividade brilhar!
-:warning: IMPORTANTE: você precisa deixar nítido:
-- quais arquivos/pastas foram desenvolvidos por você; 
-- quais arquivos/pastas foram desenvolvidos por outra pessoa estudante;
-- quais arquivos/pastas foram desenvolvidos pela Trybe.
--->
+# <p align="center">Projeto Sistema de Votação</p>
+
+## Contexto
+
+Este projeto é um simples sistema de votação eletrônico, que possibilita o cadastro de pessoas
+candidatas e eleitoras, além de coordenar todo o processo de votação.
+
+<strong>Rode o projeto localmente</strong><br>
+
+> ⚠️ É preciso ter [Java](https://www.oracle.com/java/) instalado em sua máquina.
+
+1. Clone o repositório:
+
+```BASH
+git clone git@github.com:mairess/projeto-sistema-de-votacao.git
+```
+
+2. Rode a classe `Principal` que está em `src/main/java/com/betrybe/sistemadevotacao/Principal`:
