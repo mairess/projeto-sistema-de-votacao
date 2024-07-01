@@ -15,4 +15,4 @@ candidatas e eleitoras, além de coordenar todo o processo de votação.
 git clone git@github.com:mairess/projeto-sistema-de-votacao.git
 ```
 
-2. Rode a classe `Principal` que está em `src/main/java/com/betrybe/sistemadevotacao/Principal`:
+2. Rode a classe `Principal` que está em `src/main/java/com/betrybe/sistemadevotacao/Principal`
